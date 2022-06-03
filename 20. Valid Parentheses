@@ -1,0 +1,29 @@
+//problem link : https://leetcode.com/problems/valid-parentheses/
+public class Solution {
+    public bool IsValid(string s) {
+        Stack<int> myStack = new Stack<int>();
+
+        for(int i=0;i<s.Length;i++){
+            if(s[i]=='(' || s[i]=='{' || s[i]=='['){
+                myStack.Push(s[i]);
+            }else{
+                if(myStack.Count <=0){
+                    return false;
+                }
+                var closed=myStack.Pop();//{[(
+                if(s[i]=='}'&&closed!='{'){
+                    return false;
+                }
+                if(s[i]==']'&&closed!='['){
+                    return false;
+                }if(s[i]==')'&&closed!='('){
+                    return false;
+                }
+            }
+        }
+        if(myStack.Count <=0)
+          return true;
+        else
+            return false;
+    }
+}
