@@ -1,0 +1,55 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+
+namespace findthelongestCommonString 
+{
+    class Program
+    {
+        public static Dictionary<string, bool> map = new Dictionary<string, bool>();
+        public static void Div(string x)
+        {
+            if (map.ContainsKey(x) || x.Length <= 0)
+            {
+                return;
+            }
+            map.Add(x, true);
+            Div(x.Substring(1));//without frist char
+            Div(x.Substring(0, x.Length - 1));//without last char
+        }
+        static void Main(string[] args)
+        {
+            string[] strs = {"reflower", "flow", "flight"};
+            Array.Sort(strs, (x, y) => x.Length.CompareTo(y.Length));
+            Div(strs[0]);
+            var val = map.Keys.ToArray();
+            Array.Sort(val, (x, y) => x.Length.CompareTo(y.Length));
+            for (int i = val.Length - 1; i >= 0; i--)
+            {
+                var t = val[i];
+                Console.WriteLine(t);
+            }
+            for (int i = val.Length - 1; i >= 0; i--)
+            {
+                var t = val[i];
+               
+                
+                bool longCommon = true;
+                foreach (var ar in strs)
+                {
+                    if (!ar.Contains(t))
+                    {
+                        longCommon = false;
+                    }
+                }
+                if (longCommon == true)
+                {
+                    Console.WriteLine( t);
+                    break;
+                }
+            }
+            
+
+        }
+    }
+}
