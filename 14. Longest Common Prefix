@@ -1,0 +1,27 @@
+problem link : https://leetcode.com/problems/longest-common-prefix/
+
+
+public class Solution {
+    
+    public string LongestCommonPrefix(string[] strs) {
+        var renadone=strs[0];
+        var longCommon=true;
+        string common="",res="";
+        for(int i=0;i<renadone.Length;i++){
+            common+=renadone[i];
+            foreach(var t in strs){
+                if (!t.StartsWith(common))
+                    {
+                        longCommon = false;
+                      break;
+                    }
+            }
+            if(longCommon){
+                res=common;
+            }else{
+                break;
+            }
+        }
+        return res;
+    }
+}
